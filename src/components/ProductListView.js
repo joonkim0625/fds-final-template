@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import withLoading from '../hoc/withLoading';
+import { Link } from 'react-router-dom';
 
 class ProductListView extends Component {
   // 컴포넌트 설정 시...
@@ -20,7 +21,8 @@ class ProductListView extends Component {
         {products.map(p => (
           <div key={p.id}>
             <div>{p.id}</div>
-            <div>{p.title}</div>
+            {/* template 리터럴을 사용하려면 {``} */}
+            <Link to={`/product/${p.id}`}>{p.title}</Link>
             {/* 문자열을 두르는 실수를 하지 마라... */}
             <img src={p.imgURL} alt={p.title} />
           </div>
