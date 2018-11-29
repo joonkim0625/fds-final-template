@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 // 1. 제어되는 함수로 만들기
 // 2. 로그인 버튼 눌렀을 때 onLogin 함수 작동
@@ -12,6 +13,8 @@ export default class LoginFormView extends Component {
     this.state = {
       username: '',
       password: '',
+      // 로그인의 성공 여부를 상태에 저장
+      success: false,
     };
   }
 
@@ -33,13 +36,22 @@ export default class LoginFormView extends Component {
   // }
 
   // LoginForm.js에서 받은 prop을 받아와서 실행시킬 수 있게 하는 함수...
-  handleLoginButtonClick() {
+  // 비동기함수 처리가 가능한 이유는 유저컨텍스트에서 비동기함수로 설정되었기 때문에... 완전하게 좋은 처리 방법은 아니다.
+  async handleLoginButtonClick() {
     const { onLogin } = this.props;
     const { username, password } = this.state;
-    onLogin(username, password);
+    await onLogin(username, password);
+    // 로그인이 성공적으로 끝났을 때
+    this.setState({
+      success: true,
+    });
+    // Redirect 컴포넌트 렌더링 -> 주소표시줄의 상태가 바뀜
   }
   render() {
-    const { username, password } = this.state;
+    const { username, password, success } = this.state;
+    if (success) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <div>
