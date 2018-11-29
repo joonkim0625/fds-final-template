@@ -3,6 +3,11 @@ import ProductDetailView from '../components/ProductDetailView';
 import api from '../api';
 
 export default class ProductDetail extends Component {
+  // prop을 받으면 설계도가 필요... static...
+  static defaultProps = {
+    // 표시해주어야 하는 상품의 id
+    productId: null,
+  };
   constructor(props) {
     super(props);
 
@@ -17,7 +22,8 @@ export default class ProductDetail extends Component {
   }
 
   async componentDidMount() {
-    const { data: product } = await api.get('/products/1');
+    const { productId } = this.props;
+    const { data: product } = await api.get(`/products/${productId}`);
     this.setState({
       // 객체가 받아와지는 것을 전체 다 집어넣는 것
       ...product,
