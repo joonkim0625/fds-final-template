@@ -44,13 +44,22 @@ export default class ProductDetail extends Component {
     });
   }
 
+  // 서버측 장바구니에 항목을 추가하는 함수
+  handleCreateCartItem = async (optionId, quantity) => {
+    //...
+    alert(`장바구니 테스트, ${optionId}, ${quantity}`);
+  };
+
   render() {
     // state에 있는 것 전부에 넣고 싶으면 {...this.state}
     // pc와 cc의 형태가 똑같기 때문에 가능
 
     return (
       <div>
-        <ProductDetailView {...this.state} />
+        <ProductDetailView
+          onCreateCartItem={this.handleCreateCartItem}
+          {...this.state}
+        />
       </div>
     );
   }

@@ -16,6 +16,9 @@ class ProductDetailView extends Component {
       //   "price": 30000
       // }
     ],
+    // 장바구니 항목 추가 시 호출되는 함수
+    // 옵션 id와 수량을 인수로 넘겨야 함
+    onCreateCartItem: () => {},
   };
 
   constructor(props) {
@@ -78,7 +81,21 @@ class ProductDetailView extends Component {
           min="1"
           onChange={e => this.handleQuantityChange(e)}
         />
-        <div>총 가격: {totalPrice}</div>
+        <div>가격: {totalPrice}</div>
+        <button
+          onClick={() => {
+            const { selectedOptionId, quantity } = this.state;
+            if (selectedOptionId === '') {
+              alert('옵션을 선택하세요.');
+            } else if (quantity < 1) {
+              alert('1 이상의 수량을 입력하세요.');
+            } else {
+              this.props.onCreateCartItem(selectedOptionId, quantity);
+            }
+          }}
+        >
+          장바구니에 담기
+        </button>
 
         <div>{id}</div>
         <div>{title}</div>
