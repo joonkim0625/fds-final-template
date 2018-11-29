@@ -20,7 +20,8 @@ export default class ProductListView extends Component {
           <div key={p.id}>
             <div>{p.id}</div>
             <div>{p.title}</div>
-            <img src="{p.imgURL}" alt="{p.title}" />
+            {/* 문자열을 두르는 실수를 하지 마라... */}
+            <img src={p.imgURL} alt={p.title} />
           </div>
         ))}
       </div>
