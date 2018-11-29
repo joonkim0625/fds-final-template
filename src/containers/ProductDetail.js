@@ -18,12 +18,25 @@ export default class ProductDetail extends Component {
       description: '',
       mainImgUrl: '',
       detailImgUrls: [],
+      options: [
+        // 설명으로 적어주는 옵션 내의 형태
+        // {
+        //   "id": 1,
+        //   "productId": 1,
+        //   "title": "Medium",
+        //   "price": 30000
+        // }
+      ],
     };
   }
 
   async componentDidMount() {
     const { productId } = this.props;
-    const { data: product } = await api.get(`/products/${productId}`);
+    const { data: product } = await api.get(`/products/${productId}`, {
+      params: {
+        _embed: 'options',
+      },
+    });
     this.setState({
       // 객체가 받아와지는 것을 전체 다 집어넣는 것
       ...product,
