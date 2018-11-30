@@ -56,6 +56,7 @@ export default class UserProvider extends Component {
   }
 }
 
+// 컨수머를 쉽게 쓸 수 있도록 만든 함수 컴포넌트
 function withUser(WrappedComponent) {
   return function(props) {
     return (
